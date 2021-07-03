@@ -27,25 +27,19 @@ public class CustomerAPI {
         return customerRepository.findAll();
     }
 
-    @GetMapping("/info/{id}")
-    public Customer findById(@PathVariable Integer id) {
-        return customerRepository.findById(String.valueOf(id)).get();
+    @GetMapping("/{id}")
+    public Customer findById(@PathVariable String id) {
+        return customerRepository.findById(String.valueOf(id)).orElse(null);
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable String id) {
         customerRepository.deleteById(String.valueOf(id));
     }
 
-    @DeleteMapping("/deleteAll/{passcode}")
-    public ResponseEntity<String> deleteAll(@PathVariable @NonNull String passcode) {
-        if (passcode.equals("mongo_passcode")) {
-            customerRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @DeleteMapping
+    public void deleteAll() {
+        customerRepository.deleteAll();
     }
-
 }
