@@ -10,28 +10,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class SpringbootMongoApplication implements CommandLineRunner {
-
-	@Autowired
-	private CustomerRepository repository;
+public class SpringbootMongoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootMongoApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-
-		// save a couple of customers
-		repository.save(new Customer("Alice", "Smith"));
-		repository.save(new Customer("Bob", "Smith"));
-
-		// fetch all customers
-		System.out.println("Customers found with findAll():");
-		System.out.println("-------------------------------");
-		for (Customer customer : repository.findAll()) {
-			System.out.println(customer);
-		}
-
-	}
 }
